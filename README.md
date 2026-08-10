@@ -3,6 +3,10 @@
 **Live demo:** https://star-forge-bice.vercel.app
 **Repository:** https://github.com/zwerty-afk/star-forge
 
+**Team:** VectorVoice
+**Team Leader:** Khush Aggarwal — +91 9711951593
+**Track:** VoxForge — StarForge Hackathon 2026
+
 A voice-first AI library assistant built for **VoxForge 2026**. Instead of typing keywords into a
 search box, you talk to the library the way you'd talk to a knowledgeable librarian: *"Find me
 something beginner-friendly about artificial intelligence"* or *"Recommend something like Atomic

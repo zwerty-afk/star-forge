@@ -1,4 +1,5 @@
 import { Navigation } from "@/components/layout/Navigation";
+import { Footer } from "@/components/layout/Footer";
 import { MemoryPanel } from "@/components/memory/MemoryPanel";
 
 export default function MemoryPage() {
@@ -17,6 +18,7 @@ export default function MemoryPage() {
           </div>
         </section>
       </main>
+      <Footer />
     </>
   );
 }

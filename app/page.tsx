@@ -1,4 +1,5 @@
 import { Navigation } from "@/components/layout/Navigation";
+import { Footer } from "@/components/layout/Footer";
 import { VoiceAssistant } from "@/components/voice/VoiceAssistant";
 
 export default function Home() {
@@ -22,6 +23,7 @@ export default function Home() {
           <VoiceAssistant />
         </section>
       </main>
+      <Footer />
     </>
   );
 }

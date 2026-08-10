@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { VoiceOrb } from "./VoiceOrb";
 import { Waveform } from "./Waveform";
+import { ChatInput } from "./ChatInput";
 import { Transcript } from "@/components/transcript/Transcript";
 import { BookGrid } from "@/components/books/BookGrid";
 import { Badge } from "@/components/ui/Badge";
@@ -28,7 +29,7 @@ export function VoiceAssistant() {
   const [interim, setInterim] = useState("");
   const [books, setBooks] = useState<BookResult[]>([]);
   const [mode, setMode] = useState<"live" | "demo" | null>(null);
-  const [sttSupported] = useState(() => SpeechToTextService.isSupported());
+  const [sttSupported, setSttSupported] = useState(false);
 
   const sttRef = useRef<SpeechToTextService | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -49,6 +50,9 @@ export function VoiceAssistant() {
 
   useEffect(() => {
     userIdRef.current = getOrCreateUserId();
+    // Browser-capability check: must run post-mount to avoid an SSR/client hydration mismatch.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setSttSupported(SpeechToTextService.isSupported());
     if (typeof window !== "undefined") {
       audioRef.current = new Audio();
       audioRef.current.addEventListener("ended", () => {
@@ -203,6 +207,19 @@ export function VoiceAssistant() {
     setVoiceState("idle");
   }, []);
 
+  const handleChatSubmit = useCallback(
+    (text: string) => {
+      if (stateRef.current === "speaking") {
+        stopSpeaking();
+      }
+      if (stateRef.current === "listening") {
+        sttRef.current?.stop();
+      }
+      submitMessage(text);
+    },
+    [stopSpeaking, submitMessage]
+  );
+
   const handleOrbClick = useCallback(() => {
     if (voiceState === "listening") {
       stopListening();
@@ -234,6 +251,11 @@ export function VoiceAssistant() {
           color={voiceState === "speaking" ? "var(--gold)" : "var(--accent)"}
         />
       </div>
+
+      <ChatInput
+        onSubmit={handleChatSubmit}
+        disabled={voiceState === "thinking" || voiceState === "retrieving"}
+      />
 
       <div className="w-full max-w-2xl">
         <Transcript messages={messages} interim={interim} />

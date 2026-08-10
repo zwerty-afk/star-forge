@@ -1,4 +1,5 @@
 import { Navigation } from "@/components/layout/Navigation";
+import { Footer } from "@/components/layout/Footer";
 import { DiscoverBrowser } from "@/components/books/DiscoverBrowser";
 import { allBooks } from "@/lib/demoData";
 import { listAllCategories } from "@/lib/services/books";
@@ -19,6 +20,7 @@ export default function DiscoverPage() {
           <DiscoverBrowser categories={categories} />
         </section>
       </main>
+      <Footer />
     </>
   );
 }
