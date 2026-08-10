@@ -1,5 +1,8 @@
 # Athenaeum — Your Library, Spoken
 
+**Live demo:** https://star-forge-bice.vercel.app
+**Repository:** https://github.com/zwerty-afk/star-forge
+
 A voice-first AI library assistant built for **VoxForge 2026**. Instead of typing keywords into a
 search box, you talk to the library the way you'd talk to a knowledgeable librarian: *"Find me
 something beginner-friendly about artificial intelligence"* or *"Recommend something like Atomic
@@ -183,6 +186,12 @@ viewports with zero console/page errors.
 
 ## Deployment
 
-Deploy to [Vercel](https://vercel.com/new) or any Node-compatible host. Set the four environment
-variables in your hosting provider's dashboard — never commit `.env.local`. Run
-`npx tsx scripts/ingest.ts` once against your production Qdrant instance before going live.
+Deployed on [Vercel](https://vercel.com) at **https://star-forge-bice.vercel.app**, connected to
+the `zwerty-afk/star-forge` GitHub repo for automatic deploys on push. `RIME_API_KEY`,
+`QDRANT_URL`, `QDRANT_API_KEY`, and `GEMINI_API_KEY` are set as Production environment variables
+in the Vercel project dashboard — never committed to the repo. The same 142-book dataset was
+ingested once into the production Qdrant collection via `npx tsx scripts/ingest.ts` before going
+live.
+
+To deploy your own copy: fork/clone the repo, run `vercel link`, set the four environment
+variables with `vercel env add <NAME> production`, then `vercel --prod`.
